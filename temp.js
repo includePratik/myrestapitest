@@ -71,21 +71,21 @@ console.log('Program Started');
 // }).listen(8004);
 
 //
-// var net = require('net');
-//
-// var server = net.createServer(function(socket) {
-//     socket.write('Echo server\r\n');
-//    // socket.pipe(socket);
-// });
-//
-// server.listen(process.env.PORT || 3000, function() {
-//     console.log("listening on 3000");
-// });
+var net = require('net');
+
+var server = net.createServer(function(socket) {
+    socket.write('Echo server\r\n');
+   // socket.pipe(socket);
+});
+
+server.listen(process.env.PORT || 3000, function() {
+    console.log("listening on 3000");
+});
 
 //
-var http = require('http')
-http.createServer(function (req,res) {
-   res.writeHead(200,{'Content-type':'text/plain'})
-   res.write("Echo server ")
-   res.end()
-}).listen(3000);
+// var http = require('http')
+// http.createServer(function (req,res) {
+//    res.writeHead(200,{'Content-type':'text/plain'})
+//    res.write("Echo server ")
+//    res.end()
+// }).listen(3000);
