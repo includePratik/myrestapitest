@@ -86,6 +86,7 @@ console.log('Program Started');
 var http = require('http')
 http.createServer(function (req,res) {
    res.writeHead(200,{'Content-type':'text/plain'})
-   res.write("Echo server ")
+   res.write("Echo server ");
+   res.write(req.url);
    res.end()
 }).listen(process.env.PORT || 3000);
