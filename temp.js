@@ -93,7 +93,8 @@ http.createServer(function (req,res) {
     if(req.url == '/users') {
       display();
         for (var i = 0; i < users.length;) {
-            res.write(users[i]);
+            //res.write(users[i]);
+            console.log(user[i])
             i += 1;
         }
     }
