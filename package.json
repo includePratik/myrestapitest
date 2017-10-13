@@ -4,8 +4,10 @@
   "description": "\"# myrestapitest\"",
   "main": "temp.js",
   "dependencies": {
-    "mongodb-stitch": "^1.0.3",
+    "koa": "^2.3.0",
+    "koa-router": "^7.2.1",
     "mongo": "^0.1.0",
+    "mongodb-stitch": "^1.0.3",
     "net": "^1.0.2"
   },
   "devDependencies": {},
