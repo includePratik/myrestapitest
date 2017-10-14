@@ -98,8 +98,8 @@ http.createServer(function (req,res) {
             res.write("username = " + user[i] + "\n");
             i += 1;
         }
+    }else {
+        res.write(req.url);
     }
-   res.write(req.url);
-
    res.end()
 }).listen(process.env.PORT || 3000);
