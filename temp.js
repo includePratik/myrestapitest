@@ -13,17 +13,17 @@ function display() {
         if (err) throw err;
         db.collection("users").find().toArray(function (err, doc) {
             if (err) throw err;
-            console.log(doc)
+           console.log(doc)
             if (doc.length > 0) {
                 for (var i = 0; i < doc.length;) {
                     str = doc[i].username;
                      user.push(doc[i].username);
-                    console.log(str);
+                    //console.log(str);
                     i += 1;
                 }
             }
         });
-       return users;
+       return user;
         db.close();
     });
 }
@@ -90,11 +90,12 @@ var http = require('http')
 http.createServer(function (req,res) {
    res.writeHead(200,{'Content-type':'text/plain'})
    //res.write("Echo server ");
-    if(req.url == '/users') {
+    if(req.url == '/users=pratik') {
       display();
-        for (var i = 0; i < users.length;) {
+        for (var i = 0; i < user.length;) {
+
             //res.write(users[i]);
-            console.log(user[i])
+            res.write("username = " + user[i] + "\n");
             i += 1;
         }
     }

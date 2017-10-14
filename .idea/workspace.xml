@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0042f57e-fc7e-42b0-a912-f77af8ecef1c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/temp.js" afterPath="$PROJECT_DIR$/temp.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -20,8 +19,8 @@
       <file leaf-file-name="temp.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/temp.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="93" column="16" lean-forward="true" selection-start-line="93" selection-start-column="16" selection-end-line="93" selection-end-column="16" />
+            <state relative-caret-position="318">
+              <caret line="100" column="5" lean-forward="true" selection-start-line="100" selection-start-column="5" selection-end-line="100" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -35,6 +34,12 @@
         <option value="JavaScript File" />
       </list>
     </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>console</find>
+      <find>display</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -165,12 +170,12 @@
       <workItem from="1507537484191" duration="34119000" />
       <workItem from="1507797240675" duration="11580000" />
       <workItem from="1507883458969" duration="1728000" />
-      <workItem from="1507885956938" duration="6645000" />
+      <workItem from="1507885956938" duration="8838000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="59878000" />
+    <option name="totallyTimeSpent" value="62071000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -336,15 +341,15 @@
         <state relative-caret-position="210">
           <caret line="10" column="36" lean-forward="true" selection-start-line="10" selection-start-column="36" selection-end-line="10" selection-end-column="37" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/temp.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="93" column="16" lean-forward="true" selection-start-line="93" selection-start-column="16" selection-end-line="93" selection-end-column="16" />
+        <state relative-caret-position="318">
+          <caret line="100" column="5" lean-forward="true" selection-start-line="100" selection-start-column="5" selection-end-line="100" selection-end-column="5" />
           <folding />
         </state>
       </provider>
