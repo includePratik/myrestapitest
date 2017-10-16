@@ -138,9 +138,9 @@ var body = "";
     });
     req.on('end',function () {
         console.log(body);
-        req.writeHead(200,{"Content-Type":"text/json"});
+        req.writeHead(200,{"Content-Type":"application/json"});
 
-        res.write("server says  hello");
+        res.send(JSON.stringify({ "username": "Pratik" }));
         res.end();
     });
 }else{
