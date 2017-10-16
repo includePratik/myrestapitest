@@ -138,7 +138,7 @@ var body = "";
     });
     req.on('end',function () {
         console.log(body)
-        
+        res.end("Server says hello");
     });
 }
 
