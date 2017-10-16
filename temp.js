@@ -7,26 +7,26 @@ var str = "";
 
 //
 //
-var user=[];
-function display() {
-    MongoClient.connect("mongodb://admin:admin@cluster0-shard-00-00-tulwu.mongodb.net:27017,cluster0-shard-00-01-tulwu.mongodb.net:27017,cluster0-shard-00-02-tulwu.mongodb.net:27017/ChatUserAccount?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin", function (err, db) {
-        if (err) throw err;
-        db.collection("users").find().toArray(function (err, doc) {
-            if (err) throw err;
-           console.log(doc)
-            if (doc.length > 0) {
-                for (var i = 0; i < doc.length;) {
-                    str = doc[i].username;
-                     user.push(doc[i].username);
-                    //console.log(str);
-                    i += 1;
-                }
-            }
-        });
-       return user;
-        db.close();
-    });
-}
+// var user=[];
+// function display() {
+//     MongoClient.connect("mongodb://admin:admin@cluster0-shard-00-00-tulwu.mongodb.net:27017,cluster0-shard-00-01-tulwu.mongodb.net:27017,cluster0-shard-00-02-tulwu.mongodb.net:27017/ChatUserAccount?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin", function (err, db) {
+//         if (err) throw err;
+//         db.collection("users").find().toArray(function (err, doc) {
+//             if (err) throw err;
+//            console.log(doc)
+//             if (doc.length > 0) {
+//                 for (var i = 0; i < doc.length;) {
+//                     str = doc[i].username;
+//                      user.push(doc[i].username);
+//                     //console.log(str);
+//                     i += 1;
+//                 }
+//             }
+//         });
+//        return user;
+//         db.close();
+//     });
+// }
 console.log('Program Started');
 
 
@@ -45,34 +45,34 @@ console.log('Program Started');
 //     });
 // }
 // var findUserName = "pratik"
-function findRecord(variable , callback) {
-    MongoClient.connect("mongodb://admin:admin@cluster0-shard-00-00-tulwu.mongodb.net:27017,cluster0-shard-00-01-tulwu.mongodb.net:27017,cluster0-shard-00-02-tulwu.mongodb.net:27017/ChatUserAccount?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin", function (err, db) {
-        if (err) throw err;
-console.log("in function")
-            var temp = db.collection("users").find({"username":variable}).toArray(function(err,doc){
-               if(err) throw err;
-                console.log(doc[0].username);
-                callback(true);
-            });
+// function findRecord(variable , callback) {
+//     MongoClient.connect("mongodb://admin:admin@cluster0-shard-00-00-tulwu.mongodb.net:27017,cluster0-shard-00-01-tulwu.mongodb.net:27017,cluster0-shard-00-02-tulwu.mongodb.net:27017/ChatUserAccount?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin", function (err, db) {
+//         if (err) throw err;
+// console.log("in function")
+//             var temp = db.collection("users").find({"username":variable}).toArray(function(err,doc){
+//                if(err) throw err;
+//                 console.log(doc[0].username);
+//                 callback(true);
+//             });
+//
+//         db.close();
+//     });
+// }
 
-        db.close();
-    });
-}
-
-function deleteEntry(){
-    MongoClient.connect("mongodb://admin:admin@cluster0-shard-00-00-tulwu.mongodb.net:27017,cluster0-shard-00-01-tulwu.mongodb.net:27017,cluster0-shard-00-02-tulwu.mongodb.net:27017/ChatUserAccount?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin", function (err, db) {
-        if (err) throw err;
-        console.log("in deleteEntry function")
-        var temp = db.collection("users").remove({"username":"pratik"},function (err , result) {
-           if (err) throw err;
-           process.stdout.write("user was deleted");
-            
-        });
-
-
-        db.close();
-    });
-}
+// function deleteEntry(){
+//     MongoClient.connect("mongodb://admin:admin@cluster0-shard-00-00-tulwu.mongodb.net:27017,cluster0-shard-00-01-tulwu.mongodb.net:27017,cluster0-shard-00-02-tulwu.mongodb.net:27017/ChatUserAccount?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin", function (err, db) {
+//         if (err) throw err;
+//         console.log("in deleteEntry function")
+//         var temp = db.collection("users").remove({"username":"pratik"},function (err , result) {
+//            if (err) throw err;
+//            process.stdout.write("user was deleted");
+//
+//         });
+//
+//
+//         db.close();
+//     });
+// }
 
 //
 // findRecord();
@@ -130,16 +130,22 @@ function deleteEntry(){
 
 http.createServer(function (req,res) {
 
-if (req.method ==="POST"){
+if (req.method === "POST"){
 var body = "";
     req.on('data',function (chunk) {
         body +=chunk;
         
     });
     req.on('end',function () {
-        console.log(body)
-        res.end("Server says hello");
+        console.log(body);
+        req.writeHead(200,{"Content-Type":"text/json"});
+
+        res.write("server says  hello");
+        res.end();
     });
+}else{
+    req.writeHead(200,{"Content-Type":"text/plain"});
+    res.end("server got request")
 }
 
 }).listen(process.env.PORT ||3000);
