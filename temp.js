@@ -130,18 +130,22 @@ console.log('Program Started');
 
 http.createServer(function (req,res) {
 
+    console.log("")
+
 if (req.method === "POST"){
 var body = "";
     req.on("data",function (chunk) {
         body +=chunk;
         
     });
+
     req.on("end",function () {
 
         res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify({ "username": "Pratik" }));
-        res.end();
+    //    res.end(JSON.stringify({ "username": "Pratik" }));
     });
+
+
 }else{
     res.writeHead(200,{"Content-Type":"text/plain"});
     res.end("server got request")
