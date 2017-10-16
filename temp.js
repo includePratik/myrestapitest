@@ -45,19 +45,35 @@ console.log('Program Started');
 //     });
 // }
 // var findUserName = "pratik"
-// function findRecord() {
-//     MongoClient.connect("mongodb://admin:admin@cluster0-shard-00-00-tulwu.mongodb.net:27017,cluster0-shard-00-01-tulwu.mongodb.net:27017,cluster0-shard-00-02-tulwu.mongodb.net:27017/ChatUserAccount?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin", function (err, db) {
-//         if (err) throw err;
-// console.log("in function")
-//             var temp = db.collection("users").find({"username":"pratik"}).toArray(function(err,doc){
-//                if(err) throw err;
-//                   console.log(doc[0].username)
-//                 console.log(doc[0].password)
-//                 return (doc[0].username)
-//             });
-//         db.close();
-//     });
-// }
+function findRecord(variable , callback) {
+    MongoClient.connect("mongodb://admin:admin@cluster0-shard-00-00-tulwu.mongodb.net:27017,cluster0-shard-00-01-tulwu.mongodb.net:27017,cluster0-shard-00-02-tulwu.mongodb.net:27017/ChatUserAccount?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin", function (err, db) {
+        if (err) throw err;
+console.log("in function")
+            var temp = db.collection("users").find({"username":variable}).toArray(function(err,doc){
+               if(err) throw err;
+                console.log(doc[0].username);
+                callback(true);
+            });
+
+        db.close();
+    });
+}
+
+function deleteEntry(){
+    MongoClient.connect("mongodb://admin:admin@cluster0-shard-00-00-tulwu.mongodb.net:27017,cluster0-shard-00-01-tulwu.mongodb.net:27017,cluster0-shard-00-02-tulwu.mongodb.net:27017/ChatUserAccount?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin", function (err, db) {
+        if (err) throw err;
+        console.log("in deleteEntry function")
+        var temp = db.collection("users").remove({"username":"pratik"},function (err , result) {
+           if (err) throw err;
+           process.stdout.write("user was deleted");
+            
+        });
+
+
+        db.close();
+    });
+}
+
 //
 // findRecord();
 //
@@ -85,21 +101,45 @@ console.log('Program Started');
 //     console.log("listening on 3000");
 // });
 
+// deleteEntry();
+// var http = require('http')
+// http.createServer(function (req,res) {
+//    res.writeHead(200,{'Content-type':'text/json'})
+//    //res.write("Echo server ");
+//     if(req.url == '/users=pratik') {
+//       // display();
+//       //   for (var i = 0; i < user.length;) {
+//
+//             //res.write(users[i]);
+//
+//             if (findRecord('pratik')){
+//                 res.write("record was found");
+//             }else{
+//                 res.write('record not found');
+//             }
+//         //
+//         //     i += 1;
+//         // }
+//     }else {
+//         res.write(req.url);
+//     }
+//    res.end()
+// }).listen(process.env.PORT || 3000);
 
-var http = require('http')
+
+
 http.createServer(function (req,res) {
-   res.writeHead(200,{'Content-type':'text/plain'})
-   //res.write("Echo server ");
-    if(req.url == '/users=pratik') {
-      display();
-        for (var i = 0; i < user.length;) {
 
-            //res.write(users[i]);
-            res.write("username = " + user[i] + "\n");
-            i += 1;
-        }
-    }else {
-        res.write(req.url);
-    }
-   res.end()
-}).listen(process.env.PORT || 3000);
+if (req.method ==="POST"){
+var body = "";
+    req.on('data',function (chunk) {
+        body +=chunk;
+        
+    });
+    req.on('end',function () {
+        console.log(body)
+        
+    });
+}
+
+}).listen(process.env.PORT ||3000);
