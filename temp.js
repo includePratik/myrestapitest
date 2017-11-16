@@ -1,6 +1,7 @@
 var MongoClient = require('mongodb').MongoClient;
-var http = require('http')
-// var objectid = require('mongodb').objectId
+var http = require('http');
+var async = require('async');
+// var asyncpara = require('async-parallel');
 var str = "";
 //
 //
@@ -45,19 +46,30 @@ console.log('Program Started');
 //     });
 // }
 // var findUserName = "pratik"
-// function findRecord(variable , callback) {
-//     MongoClient.connect("mongodb://admin:admin@cluster0-shard-00-00-tulwu.mongodb.net:27017,cluster0-shard-00-01-tulwu.mongodb.net:27017,cluster0-shard-00-02-tulwu.mongodb.net:27017/ChatUserAccount?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin", function (err, db) {
-//         if (err) throw err;
-// console.log("in function")
-//             var temp = db.collection("users").find({"username":variable}).toArray(function(err,doc){
-//                if(err) throw err;
-//                 console.log(doc[0].username);
-//                 callback(true);
-//             });
-//
-//         db.close();
-//     });
-// }
+function findRecord(variable,response) {
+    MongoClient.connect("mongodb://admin:admin@cluster0-shard-00-00-tulwu.mongodb.net:27017,cluster0-shard-00-01-tulwu.mongodb.net:27017,cluster0-shard-00-02-tulwu.mongodb.net:27017/ChatUserAccount?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin", function (err, db) {
+        if (err) throw err;
+
+            var temp = db.collection("users").find({"username":"pratik@includetech.co"}).toArray(function(err,doc){
+               // if(err) throw err;
+                //console.log(doc[0].username);
+
+                    if (doc && doc[0] && doc[0].username != ' '){
+                        console.log("returning true");
+                        return response(true);
+                    }else{
+                        console.log("returning false");
+                        return response(false);
+                    }
+
+
+            });
+
+
+
+        db.close();
+    });
+}
 
 // function deleteEntry(){
 //     MongoClient.connect("mongodb://admin:admin@cluster0-shard-00-00-tulwu.mongodb.net:27017,cluster0-shard-00-01-tulwu.mongodb.net:27017,cluster0-shard-00-02-tulwu.mongodb.net:27017/ChatUserAccount?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin", function (err, db) {
@@ -127,22 +139,51 @@ console.log('Program Started');
 // }).listen(process.env.PORT || 3000);
 
 
-
+var stack = [];
 http.createServer(function (req,res) {
 
-    console.log("")
 
 if (req.method === "POST"){
 var body = "";
-    req.on("data",function (chunk) {
+var status ="";
+var username ="";
+
+   req.on("data",function (chunk) {
         body +=chunk;
-        
+        // console.log(JSON.parse(body));
+        // var dic = JSON.parse(body);
+        console.log(body.data);
+        // console.log(dic.password);
+        // console.log(dic.username);   
+        findRecord("pratik@includetech.co", function(res){
+            console.log(res);
+            status = res;
+            console.log("Status is"+ status);
+        });
     });
+    req.on("body" , function (chunk) {
+    console.log(chunk);
+    });
+
+
+    // console.log(req.body.password);
+    // console.log(body +"body")
+
+   //console.log(req);
 
     req.on("end",function () {
 
+
         res.setHeader('Content-Type', 'application/json');
-       res.end(JSON.stringify({ "username": "Pratik" }));
+       if(status){
+        res.end(JSON.stringify({ "state": "true" }));
+           console.log("returning True to client");
+       }else{
+            console.log("returning False to client");
+
+           res.end(JSON.stringify({ "state": "false" }));
+       }
+
     });
 
 
@@ -151,4 +192,5 @@ var body = "";
     res.end("server got request")
 }
 
-}).listen(process.env.PORT ||3000);
+}).listen(process.env.PORT ||3001);
+
